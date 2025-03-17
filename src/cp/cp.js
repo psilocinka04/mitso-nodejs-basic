@@ -1,6 +1,8 @@
-const spawnChildProcess = async (args) => {
-    // Write your code here
-};
+import { spawn } from 'child_process';
 
-// Put your arguments in function call to test this functionality
-spawnChildProcess( /* [someArgument1, someArgument2, ...] */);
+const spawnChildProcess = (args) => {
+    const child = spawn('node', ['src/cp/script.js', ...args], {
+        stdio: ['inherit', 'inherit', 'inherit', 'ipc']
+    });
+};
+spawnChildProcess(process.argv.slice(2));
