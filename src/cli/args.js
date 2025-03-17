@@ -1,16 +1,15 @@
 const args = () => {
-    const argsArray = process.argv.slice(2);
-    const result = [];
-
-    for (let i = 0; i < argsArray.length; i += 2) {
-        if (argsArray[i].startsWith('--') && argsArray[i + 1]) {
-            const key = argsArray[i].slice(2);
-            const value = argsArray[i + 1];
-            result.push(`${key} is ${value}`);
+    const argsList = process.argv.slice(2);
+    const parsedArgs = {};
+    for (let i = 0; i < argsList.length; i += 2) {
+        if (argsList[i].startsWith('--')) {
+            parsedArgs[argsList[i].substring(2)] = argsList[i + 1];
         }
     }
-
-    console.log(result.join(', '));
+    console.log(
+        Object.entries(parsedArgs)
+            .map(([key, value]) => `${key} is ${value}`)
+            .join(', ')
+    );
 };
-
 args();
