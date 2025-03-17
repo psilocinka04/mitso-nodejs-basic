@@ -1,15 +1,10 @@
-import { promises as fs } from 'fs';
-import { join } from 'path';
-
+import { readdir } from 'fs/promises';
 const list = async () => {
-    const dirPath = join('src', 'fs', 'files');
-
     try {
-        const files = await fs.readdir(dirPath);
+        const files = await readdir('files');
         console.log(files);
     } catch {
-        console.error('FS operation failed');
+        throw new Error('FS operation failed');
     }
 };
-
-await list();
+list();

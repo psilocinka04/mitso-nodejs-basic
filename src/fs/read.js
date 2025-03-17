@@ -1,15 +1,10 @@
-import { promises as fs } from 'fs';
-import { join } from 'path';
-
+import { readFile } from 'fs/promises';
 const read = async () => {
-    const filePath = join('src', 'fs', 'files', 'fileToRead.txt');
-
     try {
-        const content = await fs.readFile(filePath, 'utf-8');
+        const content = await readFile('files/fileToRead.txt', 'utf-8');
         console.log(content);
     } catch {
-        console.error('FS operation failed');
+        throw new Error('FS operation failed');
     }
 };
-
-await read();
+read();
