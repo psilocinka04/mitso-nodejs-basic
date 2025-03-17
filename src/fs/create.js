@@ -1,5 +1,12 @@
-const create = async () => {
-    // Write your code here 
-};
+import { writeFile } from 'fs/promises';
+import { join } from 'path';
 
-await create();
+const create = async () => {
+    const filePath = join('files', 'fresh.txt');
+    try {
+        await writeFile(filePath, 'I am fresh and young', { flag: 'wx' });
+    } catch (error) {
+        throw new Error('FS operation failed');
+    }
+};
+create();
